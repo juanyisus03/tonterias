@@ -54,7 +54,7 @@ def pintarGameOver(con):
     con.addstr(7,10,"*  ¡Has perdido!   *",curses.color_pair(7))
     con.addstr(8,10,"*                  *",curses.color_pair(7))
     con.addstr(9,10,"********************",curses.color_pair(7))
-    con.addstr(15,0, "Pulse cualquier tecla para finalizar el programa")
+    con.addstr(11,0, "Pulse cualquier tecla para finalizar el programa")
     con.refresh()
     con.getch()
 
@@ -221,6 +221,7 @@ def inicializarColores():
     curses.init_pair(5, 20 ,curses.COLOR_CYAN)
     curses.init_pair(6, 30,30)
     curses.init_pair(7,curses.COLOR_RED,curses.COLOR_BLACK)
+    curses.init_pair(8,curses.COLOR_RED,curses.COLOR_CYAN)
     
     curses.curs_set(0)
 
@@ -231,17 +232,17 @@ def manejarPalomas(palomas):
         palomas.append([random.randint(1, 4), 49, "^"])
         
     
-    for paloma in palomas:
-        paloma[1] -=1
-        if paloma[1] == 0:
-            palomas.remove(paloma)
+    for i in range(len(palomas)-1,-1,-1):
+        palomas[i][1] -=1
+        if palomas[i][1] == 0:
+            palomas.remove(palomas[i])
         else:
-            if paloma[1]%3 == 0:
-                paloma[2] = "^"
-            elif paloma[1]%3 == 1:
-                paloma[2] = "─"
+            if palomas[i][1]%3 == 0:
+                palomas[i][2] = "^"
+            elif palomas[i][1]%3 == 1:
+                palomas[i][2] = "─"
             else: 
-                paloma[2] = "v"
+                palomas[i][2] = "v"
         
 
 def pintarJugador(con, player):
@@ -264,10 +265,19 @@ def pintarEscenario(con):
     for i in range(11):
         con.addstr(i,0,f"                                                  ",curses.color_pair(1))
     for i in range(vidas):
-        con.addstr(0, 0 + i, "o", curses.color_pair(1))
+        con.addstr(0, 1 + i*2, "♥", curses.color_pair(8))
     con.addstr(11,0,"                                                  ",curses.color_pair(3))
     con.addstr(12,0,"                                                  ",curses.color_pair(6))
     con.addstr(13,0,"                                                  ",curses.color_pair(6))
+    
+    con.addstr(2,52,"      PUNTOS   ")
+    con.addstr(3,52,"  ==============   ")
+    con.addstr(5,52,"     $ -> 10          ")
+    con.addstr(7,52,"   \  /          ")
+    con.addstr(8,52,"   (xx) -> 100          ")
+    con.addstr(10,52,"   \  /          ")
+    con.addstr(11,52,"   (--) -> -10          ")
+    
     
     con.addstr(0,52, f"Puntos: {puntos}")
 
