@@ -1,36 +1,32 @@
 import curses
 
-def clear_input_buffer(stdscr):
-    """Clear the input buffer."""
-    stdscr.nodelay(True)  # No bloquear las llamadas a getch
-    try:
-        while stdscr.getch() != -1:
-            pass
-    except curses.error:
-        pass
-    stdscr.nodelay(False)  # Restaurar el comportamiento de bloqueo
-
 def main(stdscr):
-    # Inicializa curses
-    curses.cbreak()
-    stdscr.keypad(True)
-    curses.noecho()
-
-    stdscr.addstr(0, 0, "Presiona cualquier tecla y luego borra el buffer...")
+    # Clear screen
+    stdscr.clear()
+    
+    # Enable mouse events
+    curses.mousemask(curses.ALL_MOUSE_EVENTS)
+    
+    # Instructions for quitting
+    stdscr.addstr(0, 0, "Click anywhere or press 'q' to quit.")
     stdscr.refresh()
 
-    # Espera una tecla
-    stdscr.getch()
+    while True:
+        # Wait for an event
+        key = stdscr.getch()
+        
+        # Handle mouse events
+        if key == curses.KEY_MOUSE:
+            _, mx, my, _, _ = curses.getmouse()
+            # Display the mouse click position
+            stdscr.addstr(1, 0, f"Mouse clicked at ({mx}, {my})")
+            stdscr.refresh()
+        
+        # Exit if 'q' is pressed
+        if key == ord('q'):
+            break
 
-    # Borra el buffer de entrada
-    clear_input_buffer(stdscr)
+# Run the curses program
+curses.wrapper(main)
 
-    stdscr.addstr(1, 0, "Buffer de entrada borrado. Presiona otra tecla para salir.")
-    stdscr.addstr(0,0,chr(30))
-    stdscr.refresh()
-
-    # Espera otra tecla antes de salir
-    stdscr.getch()
-
-if __name__ == "__main__":
-    curses.wrapper(main)
+    
