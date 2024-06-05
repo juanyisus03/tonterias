@@ -90,7 +90,7 @@ def main(con:curses.window):
         pintarJugador(con, plataformas, player)
             
         clear_input_buffer(con)
-        time.sleep(0.05)
+        time.sleep(0.07)
     
     pintarGameOver(con)
 
