@@ -184,12 +184,12 @@ def main(stdscr):
     # Intento obtener el record del fichero pointsSnake.csv, si este no llega a existir lo crea el fichero
     record = ""
     try:
-        with open("pointsSnake.csv", "r") as file:
+        with open("snake/pointsSnake.csv", "r") as file:
 
             record = file.readlines()[-1]
 
     except FileNotFoundError:
-        with open("pointsSnake.csv", "w") as file:
+        with open("snake/pointsSnake.csv", "w") as file:
             file.write("# Record de puntos en el juego de la serpiente\n")
             file.write("# Este archivo guarda el record del juego\n")
             file.write("# No edite manualmente este archivo\n")
@@ -229,7 +229,7 @@ def main(stdscr):
     stdscr.addstr(0,0,"Fin de la Partida")
     # Comprueba si has superado el record y lo guarda en el fichero
     if (surpassRecord):
-        with open("pointsSnake.csv", "w") as file:
+        with open("snake/pointsSnake.csv", "w") as file:
             file.write("# Record de puntos en el juego de la serpiente\n")
             file.write("# Este archivo guarda el record del juego\n")
             file.write("# No edite manualmente este archivo\n")

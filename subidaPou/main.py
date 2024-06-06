@@ -59,7 +59,7 @@ def main(con:curses.window):
            
             for i in range(len(plataformas)-1,-1,-1):
                 plataformas[i].setY(plataformas[i].getY()+ 1)
-                if plataformas[i].getY() == 15:
+                if plataformas[i].getY() > 15:
                     plataformas.remove(plataformas[i])
                     if plataformas[-1].getX() < 3:
                         plataformas.append(Actor(plataformas[-1].getX() + random.randint(0,5), plataformas[-1].getY() - random.randint(4,6)))
@@ -90,7 +90,7 @@ def main(con:curses.window):
         pintarJugador(con, plataformas, player)
             
         clear_input_buffer(con)
-        time.sleep(0.07)
+        time.sleep(0.08)
     
     pintarGameOver(con)
 
