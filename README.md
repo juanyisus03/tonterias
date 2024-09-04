@@ -14,10 +14,10 @@ Bienvenido al repositorio de **Juegos Tontos**. Aquí encontrarás una colecció
 
 Para clonar el repositorio e instalar las dependencias necesarias, sigue estos pasos:
 
-git clone https://github.com/tu-usuario/juegos-tontos.git
+git clone https://github.com/juanyisus03/tonterias.git
 
 
-cd juegos-tontos
+cd tonterias
 
 ## Uso
 
